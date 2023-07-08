@@ -1,0 +1,49 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Category{% endblock title %}
+
+{% block main-content %}
+<div class="category-container my-5">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="list-group">
+                {% for val in title %}
+                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                    {{val.title}}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="row">
+            {% for b in book  %}
+                <div class="col text-center mb-4">
+                    <a href="#" class="btn">
+                        <div style="border: 5px solid black;">
+                            <img src="{{b.cover.url}}" width="300px" height="300px" alt="No Image"/>
+                            <div class="details-container">
+                                <div class="fw-bold">{{b.title}}</div>
+                                <div class="fw-bold" style="font-family: cursive; font-size: 15px" >{{b.author}}</div>
+                                <div class="fw-bold text-danger">
+                                    $ {{b.selling_price}}
+                                </div>
+                                <div class="rating">
+                                    {% for i in "12345" %}
+                                    {% if b.rating >= forloop.counter %}
+                                        <span class="star" style="color: gold;">&#9733;</span>
+                                    {% else %}
+                                        <span class="star">&#9733;</span>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>    
+            {% endfor %}
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock main-content %}
+

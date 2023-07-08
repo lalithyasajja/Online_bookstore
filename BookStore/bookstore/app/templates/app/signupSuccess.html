@@ -1,0 +1,19 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}SignupSuccess{% endblock title %}
+
+{% block main-content %}
+<div class="success-card-container">
+<div class="card text-center success-card" >
+    <div>
+        <i class="fa fa-6x fa-check-circle success-icon" aria-hidden="true"></i>
+    </div>
+    <div class="card-body">
+      <h1 class="card-title">SUCCESS</h1>
+      <p class="card-text">We sent you an email with the confirmation link!</p>
+    </div>
+  </div>
+  <a href="{% url 'home' %}" class="btn btn-primary button-style success-btn">Back to Home</a>
+  {% comment %} <button href="{% url 'home' %}" class="btn btn-primary button-style success-btn" type="button">Back to Home</button> {% endcomment %}
+</div>
+{% endblock main-content %}
