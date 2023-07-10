@@ -107,12 +107,12 @@
     
 .gradient-custom-2 {
     /* fallback for old browsers */
-    background: #fcde67;
+    background: black;
     margin-top: 4rem;
 }
     
 .bg-indigo {
-    background-color: #5BCCF6;
+    background-color: white;
 }
 @media (min-width: 992px) {
     .card-registration-2 .bg-indigo {
@@ -128,7 +128,7 @@
 }
 
 .signup-text{
-    color: black;
+    color: white;
 }
 
 .gradient-custom {
@@ -159,12 +159,13 @@
     height: fit-content;
     padding: 2rem;
     border-radius: 25px;
-    background-color: #5BCCF6;
+    background-color: black;
+    border: 2px solid white;
 }
 
 .success-icon{
-    color: green;
-    background: #fcde67;
+    color: black;
+    background: white;
     position: absolute;
     top: -57px;
     border-radius: 3rem;

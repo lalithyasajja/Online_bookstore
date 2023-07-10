@@ -7,7 +7,7 @@
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div class="card text-black" style="border-radius: 1rem; background-color: #5BCCF6;">
+          <div class="card text-black" style="border-radius: 1rem; background-color: black; border: 2px solid white;">
             <div class="card-body p-5 text-center">
   
               <div class="mt-md-4">
@@ -24,11 +24,15 @@
                 <div class="login-btn">
                     <button class="btn btn-primary button-style" type="button">Login</button>
                     </div>
-                <p class="small pb-lg-2"><a class="text-black-50" href="#!">Forgot password?</a></p>
+                <p class="small pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
               </div>
   
               <div>
-                <p class="mb-0">Don't have an account? <a href="{% url 'signup' %}" class="text-black-50 fw-bold">Sign Up</a>
+                <p class="mb-0 text-white">Don't have an account? <a href="{% url 'signup' %}" class="text-white-50 fw-bold">Sign Up</a>
+                </p>
+              </div>
+              <div>
+                <p class="mb-0 text-white">Admin? <a href="/admin/" class="text-white-50 fw-bold">Signin here</a>
                 </p>
               </div>
   
