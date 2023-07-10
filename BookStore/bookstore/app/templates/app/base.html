@@ -16,7 +16,7 @@
 
     <style>
       body {
-        background-color: #fcde67;
+        background-color: black;
       }
     </style>
 
@@ -38,7 +38,7 @@
     <script src='{% static 'app/js/all.min.js' %}'></script>
     <script src='{% static 'app/js/myscript.js' %}'></script>
 
-    <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary" style="background-color: #5BCCF6 !important">
+    <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary" style="background-color: black !important">
         <div class="container" style="width: auto">
             <a class="navbar-brand" href="#">
               <img src="/static/app/images/icons/bulldog.jpg" width="48px" height="48px" alt="">
@@ -48,14 +48,14 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><i class="fa fa-fw fa-home" style="color: #000000;"></i> Home</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><i class="fa fa-fw fa-home" style="color: white;"></i> Home</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="fa fa-fw fa-list" style="color: #000000;"></i>
+                  <i class="fa fa-fw fa-list" style="color: white;"></i>
                   Categories
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" style= "background-color: black; border: 1px solid white;">
                   <li><a class="dropdown-item" href="{% url 'category' 'FIC' %}">Fiction</a></li>
                   <li><a class="dropdown-item" href="{% url 'category' 'NOF' %}">Non Fiction</a></li>
                   <li><a class="dropdown-item" href="{% url 'category' 'ROM' %}">Romance</a></li>
@@ -68,40 +68,40 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#" style="width: max-content"><i class="fa fa-fw fa-certificate" style="color: #ff0000;"></i> New Releases</a>
+                <a class="nav-link active" aria-current="page" href="#" style="width: max-content"><i class="fa fa-fw fa-certificate" style="color: red;"></i> New Releases</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#" style="width: max-content"><i class="fa fa-fw fa-award" style="color: #000000;"></i> Best Sellers</a>
+                <a class="nav-link active" aria-current="page" href="#" style="width: max-content"><i class="fa fa-fw fa-award" style="color: white;"></i> Best Sellers</a>
               </li>
             </ul>
           </div>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'search' %}" style="width: max-content"><i class="fa fa-fw fa-search" style="color: #000000;"></i> Search</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'search' %}" style="width: max-content"><i class="fa fa-fw fa-search" style="color: white;"></i> Search</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-fw fa-user" style="color: #000000;"></i> Prudhvi
               </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="fa fa-solid fa-address-card" style="color: #000000;"></i> Profile</a></li>
-                <li><a class="dropdown-item" href="#"><i class="fa fa-solid fa-truck" style="color: #000000;"></i> Orders</a></li>
-                <li><a class="dropdown-item" href="{% url 'changePwd' %}"><i class="fa fa-solid fa-key" style="color: #000000;"></i> Change Password</a></li>
-                <li><a class="dropdown-item" href="#"><i class="fa fa-solid fa-door-open" style="color: #000000;"></i> Logout</a></li>
+              <ul class="dropdown-menu" style= "background-color: black; border: 1px solid white;">
+                <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="fa fa-solid fa-address-card" style="color: white;"></i> Profile</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fa fa-solid fa-truck" style="color: white;"></i> Orders</a></li>
+                <li><a class="dropdown-item" href="{% url 'changePwd' %}"><i class="fa fa-solid fa-key" style="color: white;"></i> Change Password</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fa fa-solid fa-door-open" style="color: white;"></i> Logout</a></li>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#"><i class="fa fa-fw fa-cart-arrow-down" style="color: #000000;"></i> Cart 4</a>
+              <a class="nav-link active" aria-current="page" href="#"><i class="fa fa-fw fa-cart-arrow-down" style="color: white;"></i> Cart 4</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#"><i class="fa fa-heart" aria-hidden="true"></i> Wishlist 4</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'signin' %}"><i class="fa fa-fw fa-user" style="color: #000000;"></i> Sign In</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'signin' %}"><i class="fa fa-fw fa-user" style="color: white;"></i> Sign In</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'signup' %}"><i class="fa fa-fw fa-user-plus" style="color: #000000;"></i> Sign Up</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'signup' %}"><i class="fa fa-fw fa-user-plus" style="color: white;"></i> Sign Up</a>
             </li>
           </ul>
         </div>
