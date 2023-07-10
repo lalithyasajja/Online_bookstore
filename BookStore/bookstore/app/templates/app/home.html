@@ -47,42 +47,75 @@
 <br></br>
 <h1>Featured Books</h1>
 <br></br>
-<div class="row">
-{% for b in featuredBooks %}
-        <div class="col text-center mb-4">
-            <a href="#" class="btn">
-                <div style="border: 5px solid black;">
-                    <img src="{{b.cover.url}}" width="300px" height="300px" alt="No Image"/>
-                    <div class="details-container">
-                        <div class="fw-bold">{{b.title}}</div>
-                        <div class="fw-bold" style="font-family: cursive; font-size: 15px" >{{b.author}}</div>
-                        <div class="fw-bold text-danger">
-                            $ {{b.selling_price}}
+<div class="row" style="margin:2rem;">
+    {% for b in featuredBooks %}
+            <div class="col text-center mb-4">
+                <a class="btn">
+                    <div style="border: 5px solid black; width: 22rem;" class="book-container">
+                        <img src="{{b.cover.url}}" width="300px" height="300px" alt="No Image"/>
+                        <div class="details-container">
+                            <div class="fw-bold">{{b.title}}</div>
+                            <div class="fw-bold" style="font-family: cursive; font-size: 15px" >{{b.author}}</div>
+                            <div class="fw-bold text-danger">
+                                $ {{b.selling_price}}
+                            </div>
+                            <div class="rating">
+                                {% for i in "12345" %}
+                                {% if b.rating >= forloop.counter %}
+                                    <span class="star" style="color: gold;">&#9733;</span>
+                                {% else %}
+                                    <span class="star">&#9733;</span>
+                                {% endif %}
+                                {% endfor %}  
+                            </div>
+                            <div>
+                            <a href="{% url 'bookDetails' book_isbn=b.ISBN %}" class="btn btn-light" role="button" style="border: 2px solid black">
+                                <i class="fa fa-info-circle" aria-hidden="true"></i> View Details</a>
+                            <button class="btn btn-primary me-md-2 cart-button" type="button" id="cart-button-{{b.id}}">
+                                Add to Cart
+                                <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                            </button>
                         </div>
-                        <div class="rating">
-                            {% for i in "12345" %}
-                            {% if b.rating >= forloop.counter %}
-                                <span class="star" style="color: gold;">&#9733;</span>
-                            {% else %}
-                                <span class="star">&#9733;</span>
-                            {% endif %}
-                            {% endfor %}
                         </div>
                     </div>
-                </div>
-            </a>
-        </div>  
-{% endfor %}
-</div>
+                </a>
+            </div>
+            <div class="toast-container position-fixed end-0 p-3">
+                <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" id="liveToast-{{b.id}}">
+                    <div class="d-flex">
+                      <div class="toast-body">
+                        <span id="toast-message-{{b.id}}"></span> added to Cart!
+                      </div>
+                      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                  </div>
+              </div>
+              <script>
+                const toastTrigger{{b.id}} = document.getElementById('cart-button-{{b.id}}')
+                const toastLiveExample{{b.id}} = document.getElementById('liveToast-{{b.id}}')
+                const toastMessage{{b.id}} = document.getElementById('toast-message-{{b.id}}');
+                if (toastTrigger{{b.id}}) {
+                  const toastBootstrap{{b.id}} = bootstrap.Toast.getOrCreateInstance(toastLiveExample{{b.id}})
+                  toastTrigger{{b.id}}.addEventListener('click', () => {
+                        toastMessage{{b.id}}.textContent = "{{b.title}}";
+                      toastBootstrap{{b.id}}.show()
+                  })
+                }
+              </script>
+    {% endfor %}
+    </div>
+    
+        
+
 
 <br></br>
 <h1>Top Sellers</h1>
 <br></br>
-<div class="row">
+<div class="row" style="margin:2rem;">
 {% for b in topSellers %}
         <div class="col text-center mb-4">
             <a href="#" class="btn">
-                <div style="border: 5px solid black;">
+                <div style="border: 5px solid black; width: 22rem;">
                     <img src="{{b.cover.url}}" width="300px" height="300px" alt="No Image"/>
                     <div class="details-container">
                         <div class="fw-bold">{{b.title}}</div>
@@ -99,106 +132,42 @@
                             {% endif %}
                             {% endfor %}
                         </div>
+                        <div>
+                        <a href="{% url 'bookDetails' book_isbn=b.ISBN %}" class="btn btn-light" role="button" style="border: 2px solid black">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i> View Details</a>
+                        <button class="btn btn-primary me-md-2 cart-button" type="button" id="cart-button-{{b.id}}">
+                            Add to Cart
+                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
                     </div>
                 </div>
             </a>
-        </div>  
+        </div>
+        
+    <div class="toast-container position-fixed end-0 p-3">
+        <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" id="liveToast-{{b.id}}">
+            <div class="d-flex">
+            <div class="toast-body">
+                <span id="toast-message-{{b.id}}"></span> added to Cart!
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const toastTrigger{{b.id}} = document.getElementById('cart-button-{{b.id}}')
+        const toastLiveExample{{b.id}} = document.getElementById('liveToast-{{b.id}}')
+        const toastMessage{{b.id}} = document.getElementById('toast-message-{{b.id}}');
+        if (toastTrigger{{b.id}}) {
+        const toastBootstrap{{b.id}} = bootstrap.Toast.getOrCreateInstance(toastLiveExample{{b.id}})
+        toastTrigger{{b.id}}.addEventListener('click', () => {
+                toastMessage{{b.id}}.textContent = "{{b.title}}";
+            toastBootstrap{{b.id}}.show()
+        })
+        }
+    </script>  
 {% endfor %}
 </div>
 <br></br>
 {% endblock main-content %}
-
-
-
-{% comment %} <div class="row container mx-auto">
-    <div class="col-md-4 col-sm-4 mi-go wow fadeInUp p-5" data-wow-duration="1s" data-wow-delay="0.65" style="animation-duration: 1s; animation-delay: 0.6s; animation-name: none;">
-        <div class="goodnesssec">
-            <a href="#">
-                <div class="category-img text-center">
-                    <img src="{% static 'app/images/icons/Bio.jpg' %} " class="img-responsive center-block" alt="">
-                    <p class="category-name">Biography</p> 
-                </div>
-            </a> 
-        </div>
-    </div>
-    <div class="col-md-4 col-sm-4 mi-go wow fadeInUp p-5" data-wow-duration="1s" data-wow-delay="0.65" style="animation-duration: 1s; animation-delay: 0.6s; animation-name: none;">
-        <div class="goodnesssec">
-            <a href="#">
-                <div class="category-img text-center">
-                    <img src="{% static 'app/images/icons/Fic.jpg' %} " class="img-responsive center-block" alt="">
-                    <p class="category-name">Fiction</p> 
-                </div>
-            </a> 
-        </div>
-    </div>
-    <div class="col-md-4 col-sm-4 mi-go wow fadeInUp p-5" data-wow-duration="1s" data-wow-delay="0.65" style="animation-duration: 1s; animation-delay: 0.6s; animation-name: none;">
-        <div class="goodnesssec">
-            <a href="#">
-                <div class="category-img text-center">
-                    <img src="{% static 'app/images/icons/His.jpg' %} " class="img-responsive center-block" alt="">
-                    <p class="category-name">History</p> 
-                </div>
-            </a> 
-        </div>
-    </div>
-    <div class="col-md-4 col-sm-4 mi-go wow fadeInUp p-5" data-wow-duration="1s" data-wow-delay="0.65" style="animation-duration: 1s; animation-delay: 0.6s; animation-name: none;">
-        <div class="goodnesssec">
-            <a href="#">
-                <div class="category-img text-center">
-                    <img src="{% static 'app/images/icons/Hor.jpg' %} " class="img-responsive center-block" alt="">
-                    <p class="category-name">Horror</p> 
-                </div>
-            </a> 
-        </div>
-    </div>
-    <div class="col-md-4 col-sm-4 mi-go wow fadeInUp p-5" data-wow-duration="1s" data-wow-delay="0.65" style="animation-duration: 1s; animation-delay: 0.6s; animation-name: none;">
-        <div class="goodnesssec">
-            <a href="#">
-                <div class="category-img text-center">
-                    <img src="{% static 'app/images/icons/Mys.jpg' %} " class="img-responsive center-block" alt="">
-                    <p class="category-name">Mystery</p> 
-                </div>
-            </a> 
-        </div>
-    </div>
-    <div class="col-md-4 col-sm-4 mi-go wow fadeInUp p-5" data-wow-duration="1s" data-wow-delay="0.65" style="animation-duration: 1s; animation-delay: 0.6s; animation-name: none;">
-        <div class="goodnesssec">
-            <a href="#">
-                <div class="category-img text-center">
-                    <img src="{% static 'app/images/icons/Nf.jpg' %} " class="img-responsive center-block" alt="">
-                    <p class="category-name">Non Fiction</p> 
-                </div>
-            </a> 
-        </div>
-    </div>
-    <div class="col-md-4 col-sm-4 mi-go wow fadeInUp p-5" data-wow-duration="1s" data-wow-delay="0.65" style="animation-duration: 1s; animation-delay: 0.6s; animation-name: none;">
-        <div class="goodnesssec">
-            <a href="#">
-                <div class="category-img text-center">
-                    <img src="{% static 'app/images/icons/Rom.jpg' %} " class="img-responsive center-block" alt="">
-                    <p class="category-name">Romance</p> 
-                </div>
-            </a> 
-        </div>
-    </div>
-    <div class="col-md-4 col-sm-4 mi-go wow fadeInUp p-5" data-wow-duration="1s" data-wow-delay="0.65" style="animation-duration: 1s; animation-delay: 0.6s; animation-name: none;">
-        <div class="goodnesssec">
-            <a href="#">
-                <div class="category-img text-center">
-                    <img src="{% static 'app/images/icons/Sf.jpg' %} " class="img-responsive center-block" alt="">
-                    <p class="category-name">Science Fiction</p> 
-                </div>
-            </a> 
-        </div>
-    </div>
-    <div class="col-md-4 col-sm-4 mi-go wow fadeInUp p-5" data-wow-duration="1s" data-wow-delay="0.65" style="animation-duration: 1s; animation-delay: 0.6s; animation-name: none;">
-        <div class="goodnesssec">
-            <a href="#">
-                <div class="category-img text-center">
-                    <img src="{% static 'app/images/icons/Thr.jpg' %} " class="img-responsive center-block" alt="">
-                    <p class="category-name">Thriller</p> 
-                </div>
-            </a> 
-        </div>
-    </div>
-</div> {% endcomment %}
