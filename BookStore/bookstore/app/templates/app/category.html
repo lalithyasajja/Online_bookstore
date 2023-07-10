@@ -12,7 +12,7 @@ height: 100vh; margin-bottom: 10rem">
             {% for b in book  %}
                 <div class="col text-center mb-4">
                     <a href="#" class="btn">
-                        <div style="border: 5px solid black; width: 22rem;">
+                        <div style="border: 5px solid white; border-radius:1rem; width: 22rem;">
                             <img src="{{b.cover.url}}" width="300px" height="300px" alt="No Image"/>
                             <div class="details-container">
                                 <div class="fw-bold">{{b.title}}</div>
@@ -41,7 +41,7 @@ height: 100vh; margin-bottom: 10rem">
                         </div>
                     </a>
                 </div> 
-                <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div class="toast-container position-fixed end-0 p-3">
                     <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" id="liveToast-{{b.id}}">
                         <div class="d-flex">
                         <div class="toast-body">

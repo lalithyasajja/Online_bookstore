@@ -1,11 +1,19 @@
 .welcome-container{
-    background-color: #5BCCF6 !important;
+    background-color: black !important;
     border-radius: 5rem;
     color: black !important;
 }
 
+.h1{
+    color: white !important; 
+}
+
 .nav-item{
     font-weight: 700;
+}
+
+.nav-link{
+    color: white !important;
 }
 
 .nav-item:hover{
@@ -27,7 +35,7 @@
 
 
 .category-name{
-    color:black;
+    color:white;
     font-size: 20px;
     font-weight: 700;
     line-height: 22px;
@@ -44,7 +52,8 @@
 }
 
 .details-container {
-    background-color: #5BCCF6;
+    background-color: black;
+    color: white;
 }
 
 .category-container{
@@ -57,7 +66,8 @@
 }
 
 .footer-style{
-    background: #5BCCF6;
+    background: black;
+    color: white;
     height: 2rem;
     font-size: 1rem;
     font-weight: 500;
@@ -75,9 +85,14 @@
 }
 
 .dropdown-toggle{
-    background-color: #5BCCF6;
+    background-color: black;
     color: black;
     font-weight: 500;
+}
+
+.dropdown-item{
+    background-color: black;
+    color: white;
 }
 
 .card-registration .select-input.form-control[readonly]:not([disabled]) {
@@ -117,7 +132,7 @@
 }
 
 .gradient-custom {
-    background: #fcde67;
+    background: black;
     margin-top: 4rem;
 }
 
@@ -165,13 +180,13 @@
 
 .cart-button{
     margin: 1rem;
-    background: #fcde67;
+    /* background: #fcde67; */
     color: black;
     border: 2px solid black;
 }
 
 .cart-button:hover{
-    background: green;
+    /* background: green; */
     color: white;
     border: 2px solid black;
 }
@@ -197,4 +212,8 @@
 
 .toast-container{
     bottom: 2rem;
+}
+
+.fw-bold{
+    color: white !important;
 }

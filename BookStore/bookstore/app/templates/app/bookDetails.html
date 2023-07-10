@@ -7,7 +7,7 @@
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div class="card text-black" style="border-radius: 1rem; background-color: #5BCCF6; width: fit-content">
+          <div class="card text-black" style="border-radius: 1rem; background-color: black; width: fit-content; border: 2px solid white;">
             <div class="card-body p-5 text-center bd-card-body">
                 <img src="{{book.cover.url}}" alt="No Image" style="height: 20rem;
                 width: 15rem;">
@@ -31,8 +31,8 @@
                     
                     <div class="fw-bold" style="font-size: 15px; margin: 1rem; text-align: start"><h6>DESCRIPTION: </h6>
                         <p id="description" data-full-description="{{ book.description }}" class="book-description">{{ truncatedDescription }}</p>
-                        <a href="#" class="read-more" id="read-more-link">Read more</a>
-                        <a href="#" id="read-less-link" style="display: none;">Read less</a>
+                        <a href="#" class="read-more" id="read-more-link" style="color:white;">Read more</a>
+                        <a href="#" id="read-less-link" style="display: none; color:white;">Read less</a>
                       </div>
                       
                       <script>
