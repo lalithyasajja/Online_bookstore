@@ -11,4 +11,5 @@ urlpatterns = [
     path('signin', views.SigninView.as_view(), name="signin"),
     path('profile', views.ProfileView.as_view(), name="profile"),
     path('changePwd', views.ChangePwdView.as_view(), name="changePwd"),
+    path('bookDetails/<slug:book_isbn>', views.BookDetailsView.as_view(), name="bookDetails"),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

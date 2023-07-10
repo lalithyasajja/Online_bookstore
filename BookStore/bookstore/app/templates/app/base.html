@@ -14,13 +14,6 @@
     <link rel='stylesheet' href={% static 'app/css/all.min.css' %} />
     <link rel='stylesheet' href={% static 'app/css/style.css' %} />
 
- {% comment %} <style>
-      body {
-        background-image: url({% static 'app/images/wallpaper/books-wallpaper.jpg' %});
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-      }
-    </style> {% endcomment %}
     <style>
       body {
         background-color: #fcde67;
@@ -55,7 +48,6 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                {% comment %} <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>  {% endcomment %}
                 <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><i class="fa fa-fw fa-home" style="color: #000000;"></i> Home</a>
               </li>
               <li class="nav-item dropdown">
@@ -82,10 +74,6 @@
                 <a class="nav-link active" aria-current="page" href="#" style="width: max-content"><i class="fa fa-fw fa-award" style="color: #000000;"></i> Best Sellers</a>
               </li>
             </ul>
-            {% comment %} <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              {% comment %} <button class="btn btn-outline-success" type="submit">Search</button>
-            </form> {% endcomment %}
           </div>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
@@ -94,7 +82,7 @@
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-fw fa-user" style="color: #000000;"></i> PSC
+                <i class="fa fa-fw fa-user" style="color: #000000;"></i> Prudhvi
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="fa fa-solid fa-address-card" style="color: #000000;"></i> Profile</a></li>
@@ -123,12 +111,9 @@
       {% block banner-slider %}{% endblock banner-slider %}
       {% block information %}{% endblock information %}
       {% block main-content %}{% endblock main-content %}
-        
-      <footer class="footer-style">
+      <footer class="footer-style fixed-bottom">
         © 2023 Copyright : All Rights Reserved
       </footer>
-
-
     
 </body>
 </html>

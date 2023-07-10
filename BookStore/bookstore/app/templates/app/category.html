@@ -3,22 +3,16 @@
 {% block title %}Category{% endblock title %}
 
 {% block main-content %}
-<div class="category-container my-5">
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="list-group">
-                {% for val in title %}
-                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                    {{val.title}}</a>
-                {% endfor %}
-            </div>
-        </div>
-        <div class="col-sm-9">
-            <div class="row">
+
+<div class="category-container" style="
+height: 100vh; margin-bottom: 10rem">
+        <div class="col-sm-9" style="
+        display: contents;" >
+            <div class="row" style="margin:2rem;">
             {% for b in book  %}
                 <div class="col text-center mb-4">
                     <a href="#" class="btn">
-                        <div style="border: 5px solid black;">
+                        <div style="border: 5px solid black; width: 22rem;">
                             <img src="{{b.cover.url}}" width="300px" height="300px" alt="No Image"/>
                             <div class="details-container">
                                 <div class="fw-bold">{{b.title}}</div>
@@ -35,15 +29,43 @@
                                     {% endif %}
                                     {% endfor %}
                                 </div>
+                                <div>
+                                <a href="{% url 'bookDetails' book_isbn=b.ISBN %}" class="btn btn-light" role="button" style="border: 2px solid black">
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i> View Details</a>
+                                <button class="btn btn-primary me-md-2 cart-button" type="button" id="cart-button-{{b.id}}">
+                                    Add to Cart
+                                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
                             </div>
                         </div>
                     </a>
-                </div>    
+                </div> 
+                <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                    <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" id="liveToast-{{b.id}}">
+                        <div class="d-flex">
+                        <div class="toast-body">
+                            <span id="toast-message-{{b.id}}"></span> added to Cart!
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    const toastTrigger{{b.id}} = document.getElementById('cart-button-{{b.id}}')
+                    const toastLiveExample{{b.id}} = document.getElementById('liveToast-{{b.id}}')
+                    const toastMessage{{b.id}} = document.getElementById('toast-message-{{b.id}}');
+                    if (toastTrigger{{b.id}}) {
+                    const toastBootstrap{{b.id}} = bootstrap.Toast.getOrCreateInstance(toastLiveExample{{b.id}})
+                    toastTrigger{{b.id}}.addEventListener('click', () => {
+                            toastMessage{{b.id}}.textContent = "{{b.title}}";
+                        toastBootstrap{{b.id}}.show()
+                    })
+                    }
+                </script>   
             {% endfor %}
             </div>
         </div>
-        
-    </div>
 </div>
 {% endblock main-content %}
 

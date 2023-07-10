@@ -30,5 +30,6 @@ class Book(models.Model):
     rating = models.IntegerField()
     featured = models.BooleanField(default=False)
     topSeller = models.BooleanField(default=False)
+    description = models.TextField(default='null')
     def __str__(self):
         return self.title

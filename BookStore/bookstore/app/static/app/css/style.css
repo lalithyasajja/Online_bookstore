@@ -44,7 +44,7 @@
 }
 
 .details-container {
-    background-color: #E9E6E1;
+    background-color: #5BCCF6;
 }
 
 .category-container{
@@ -161,4 +161,40 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.cart-button{
+    margin: 1rem;
+    background: #fcde67;
+    color: black;
+    border: 2px solid black;
+}
+
+.cart-button:hover{
+    background: green;
+    color: white;
+    border: 2px solid black;
+}
+
+.bd-card-body{
+    display:flex;
+}
+
+.author-and-price{
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: max-content
+}
+
+.book-description{
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: justify;
+    font-size: 10px;
+}
+
+.toast-container{
+    bottom: 2rem;
 }
