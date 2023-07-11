@@ -82,11 +82,11 @@
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-fw fa-user" style="color: #000000;"></i> Prudhvi
+                <i class="fa fa-fw fa-user" style="color: grey;"></i> Prudhvi
               </a>
               <ul class="dropdown-menu" style= "background-color: black; border: 1px solid white;">
                 <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="fa fa-solid fa-address-card" style="color: grey;"></i> Profile</a></li>
-                <li><a class="dropdown-item" href="#"><i class="fa fa-solid fa-truck" style="color: grey;"></i> Orders</a></li>
+                <li><a class="dropdown-item" href="{% url 'orderHistory' %}"><i class="fa fa-solid fa-truck" style="color: grey;"></i> Orders</a></li>
                 <li><a class="dropdown-item" href="{% url 'changePwd' %}"><i class="fa fa-solid fa-key" style="color: grey;"></i> Change Password</a></li>
                 <li><a class="dropdown-item" href="#"><i class="fa fa-solid fa-door-open" style="color: grey;"></i> Logout</a></li>
               </ul>
