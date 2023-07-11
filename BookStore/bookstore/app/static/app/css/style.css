@@ -86,13 +86,18 @@
 
 .dropdown-toggle{
     background-color: black;
-    color: black;
+    color: white;
     font-weight: 500;
 }
 
 .dropdown-item{
     background-color: black;
     color: white;
+}
+
+.search-dropdown{
+    background-color: black;
+    border: 2px solid white;
 }
 
 .card-registration .select-input.form-control[readonly]:not([disabled]) {
