@@ -33,3 +33,20 @@ class Book(models.Model):
     description = models.TextField(default='null')
     def __str__(self):
         return self.title
+    
+class User(models.Model):
+    firstname = models.CharField(max_length=100)
+    lastname = models.CharField(max_length=100)
+    phonenumber = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    def __str__(self):
+        return self.firstname
+
+class Promotion(models.Model):
+    promocode = models.CharField(max_length=100)
+    percentage = models.IntegerField()
+    startdate = models.DateTimeField()
+    enddate = models.DateTimeField()
+    def __str__(self):
+        return self.promocode
