@@ -54,3 +54,15 @@ class CartView(View):
 class CheckoutView(View):
     def get(self, request):
         return render(request, "app/checkout.html", locals())
+
+class OrderSummaryView(View):
+    def get(self, request):
+        return render(request, "app/orderSummary.html", locals())
+    
+class OrderSuccessView(View):
+    def get(self, request):
+        return render(request, "app/orderSuccess.html", locals())
+    
+class OrderHistoryView(View):
+    def get(self, request):
+        return render(request, "app/orderHistory.html", locals())

@@ -33,6 +33,11 @@
     display: block;
 }
 
+.featured-top-books{
+    border: 2px solid white;
+    margin: 2rem;
+    padding: 2rem;
+}
 
 .category-name{
     color:white;
@@ -164,12 +169,12 @@
     height: fit-content;
     padding: 2rem;
     border-radius: 25px;
-    background-color: black;
+    background-color: green;
     border: 2px solid white;
 }
 
 .success-icon{
-    color: black;
+    color: green;
     background: white;
     position: absolute;
     top: -57px;
@@ -261,4 +266,47 @@
 
 .cart-book-title{
     color: firebrick !important;
+}
+
+.checkout-section{
+    background-color: black;
+    margin: 5rem;
+    height: 100vh;
+}
+
+.checkout-card{
+    background: black;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+
+.checkout-card-body{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.addr-pay-container{
+    width: max-content;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-new-adr-cont{
+    justify-content: space-around;
+    width: 100%;
+}
+
+.add-new-addr{
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.card-and-addr-col{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

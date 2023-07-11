@@ -1,6 +1,6 @@
 {% extends 'app/base.html' %}
 {% load static %}
-{% block title %}SignupSuccess{% endblock title %}
+{% block title %}OrderSuccess{% endblock title %}
 
 {% block main-content %}
 <div class="success-card-container">
@@ -10,7 +10,7 @@
     </div>
     <div class="card-body">
       <h1 class="card-title text-white">SUCCESS</h1>
-      <p class="card-text text-white">We sent you an email with the confirmation link!</p>
+      <p class="card-text text-white">We sent you an email with the order details!</p>
     </div>
   </div>
   <a href="{% url 'home' %}" class="btn button-style success-btn">Back to Home</a>
