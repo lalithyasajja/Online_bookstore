@@ -46,3 +46,11 @@ class BookDetailsView(View):
     def get(self, request, book_isbn):
         book = get_object_or_404(Book, ISBN=book_isbn)
         return render(request, "app/bookDetails.html", locals())
+    
+class CartView(View):
+    def get(self, request):
+        return render(request, "app/cart.html", locals())
+
+class CheckoutView(View):
+    def get(self, request):
+        return render(request, "app/checkout.html", locals())
