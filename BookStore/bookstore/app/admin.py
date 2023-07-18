@@ -9,7 +9,7 @@ class BookModelAdmin(admin.ModelAdmin):
 
 @admin.register(User)
 class UserModelAdmin(admin.ModelAdmin):
-    list_display = ['firstname', 'lastname']
+    list_display = ['account_id', 'firstname', 'lastname']
 
 @admin.register(Promotion)
 class PromotionModelAdmin(admin.ModelAdmin):
