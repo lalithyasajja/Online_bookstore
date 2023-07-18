@@ -74,12 +74,14 @@ class SignupView(View):
             # Render the signup page with an error message
             return render(request, "app/signup.html", {'password_mismatch': True})
         
+        hashed_password = make_password(password)
+        
         
         user = User(firstname=firstname, 
                     lastname=lastname, 
                     phonenumber=phonenumber, 
                     email=email,
-                    password=password, 
+                    password=hashed_password, 
                     card_number=card_number, 
                     expiration_date=expiration_date,
                     security_code=security_code, 
@@ -141,7 +143,11 @@ class SigninView(View):
             user = User.objects.get(account_id=email_accountid)
 
         print(user)
+
+        print(password)
+        print(user.password)
         if user is not None and user.check_password(password):
+            print("loggedin")
             user.is_loggedin = True
             # Create a new session
             session = SessionStore()
