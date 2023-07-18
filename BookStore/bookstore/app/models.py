@@ -65,9 +65,9 @@ class User(models.Model):
     activation_token = models.CharField(max_length=255, blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        if not self.pk:
+        # if not self.pk:
             # New user, hash the password
-            self.password = make_password(self.password)
+        self.password = make_password(self.password)
         super().save(*args, **kwargs)
 
     def check_password(self, password):
