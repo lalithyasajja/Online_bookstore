@@ -21,12 +21,14 @@ from django.core import signing
 
 # Create your views here.
 def home(request):
+    user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
     featuredBooks = Book.objects.filter(featured=True)
     topSellers = Book.objects.filter(topSeller=True)
     return render(request, "app/home.html", locals())
 
 class CategoryView(View):
     def get(self, request, val):
+        user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
         book = Book.objects.filter(category=val)
         title = Book.objects.filter(category=val).values('title')
         category_name = Book.objects.filter(category=val).values('category')
@@ -34,6 +36,7 @@ class CategoryView(View):
 
 class SearchView(View):
     def get(self, request):
+        user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
         return render(request, "app/search.html", locals())
     
 class SignupView(View):
@@ -117,10 +120,12 @@ class SignupView(View):
 
 class SignupSuccessView(View):
     def get(self, request):
+        user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
         return render(request, "app/signupSuccess.html", locals())
     
 class SigninView(View):
     def get(self, request):
+        user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
         return render(request, "app/signin.html", locals())
     
     def post(self, request):
@@ -155,6 +160,7 @@ class SigninView(View):
         
 class LogoutView(View):
     def get(self, request):
+        user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
         # Get the user's session key
         session_key = request.COOKIES.get('sessionid')
 
@@ -218,6 +224,7 @@ class ProfileView(View):
     
 class ChangePwdView(View):
     def get(self, request):
+        user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
         return render(request, "app/changePwd.html", locals())
     
     def post(self, request):
@@ -253,27 +260,33 @@ class ChangePwdView(View):
 
 class BookDetailsView(View):
     def get(self, request, book_isbn):
+        user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
         book = get_object_or_404(Book, ISBN=book_isbn)
         return render(request, "app/bookDetails.html", locals())
     
 class CartView(View):
     def get(self, request):
+        user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
         return render(request, "app/cart.html", locals())
 
 class CheckoutView(View):
     def get(self, request):
+        user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
         return render(request, "app/checkout.html", locals())
 
 class OrderSummaryView(View):
     def get(self, request):
+        user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
         return render(request, "app/orderSummary.html", locals())
     
 class OrderSuccessView(View):
     def get(self, request):
+        user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
         return render(request, "app/orderSuccess.html", locals())
     
 class OrderHistoryView(View):
     def get(self, request):
+        user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
         return render(request, "app/orderHistory.html", locals())
     
 
