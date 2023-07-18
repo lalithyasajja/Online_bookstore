@@ -1,6 +1,14 @@
+import random
 from django.db import models
+from django.contrib.auth.hashers import check_password, make_password
+from django.contrib.auth.models import UserManager
+from datetime import date
 
 # Create your models here.
+
+
+def random_number_generator():
+    return random.randint(100000, 999999)
 
 CATEGORY_CHOICES=(
     ('BIO', 'Biography'),
@@ -35,11 +43,36 @@ class Book(models.Model):
         return self.title
     
 class User(models.Model):
+    account_id = models.IntegerField(unique=True, default=random_number_generator)
     firstname = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
     phonenumber = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
+    card_number = models.CharField(max_length=30, default=' ')
+    expiration_date = models.CharField(max_length=5, default=' ')
+    security_code = models.CharField(max_length=3, default=' ')
+    street_address = models.CharField(max_length=50, default=' ')
+    apartment_suite = models.CharField(max_length=50, default=' ')
+    city = models.CharField(max_length=30, default=' ')
+    state = models.CharField(max_length=30, default=' ')
+    zip_code = models.CharField(max_length=30, default=' ')
+    contact_phone = models.CharField(max_length=30, default=' ')
+    contact_email = models.CharField(max_length=30, default=' ')
+    accept_terms = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
+    is_loggedin = models.BooleanField(default=False)
+    activation_token = models.CharField(max_length=255, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            # New user, hash the password
+            self.password = make_password(self.password)
+        super().save(*args, **kwargs)
+
+    def check_password(self, password):
+        return check_password(password, self.password)
+
     def __str__(self):
         return self.firstname
 
