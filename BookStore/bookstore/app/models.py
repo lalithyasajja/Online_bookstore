@@ -64,11 +64,11 @@ class User(models.Model):
     is_loggedin = models.BooleanField(default=False)
     activation_token = models.CharField(max_length=255, blank=True, null=True)
 
-    def save(self, *args, **kwargs):
-        # if not self.pk:
-            # New user, hash the password
-        self.password = make_password(self.password)
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if not self.pk:
+    #         # New user, hash the password
+    #         self.password = make_password(self.password)
+    #     super().save(*args, **kwargs)
 
     def check_password(self, password):
         return check_password(password, self.password)
