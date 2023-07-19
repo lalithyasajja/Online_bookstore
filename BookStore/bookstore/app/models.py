@@ -63,6 +63,7 @@ class User(models.Model):
     is_active = models.BooleanField(default=False)
     is_loggedin = models.BooleanField(default=False)
     activation_token = models.CharField(max_length=255, blank=True, null=True)
+    reset_token = models.CharField(max_length=255, blank=True, null=True)
 
     # def save(self, *args, **kwargs):
     #     if not self.pk:
