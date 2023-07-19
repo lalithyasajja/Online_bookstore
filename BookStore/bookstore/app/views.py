@@ -17,8 +17,15 @@ from django.contrib.sessions.models import Session
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 from django.core import signing
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect
+import re
 
+#custom methods
 
+def is_six_digit_number(string):
+    pattern = r'^\d{6}$'  # Matches a string consisting of exactly 6 digits
+    return bool(re.match(pattern, string))
 
 # Create your views here.
 def home(request):
@@ -135,32 +142,53 @@ class SigninView(View):
         # Retrieve the form data from the POST request
         email_accountid = request.POST.get('email_accountid')
         password = request.POST.get('password')
+        remember_me = request.POST.get('remember_me')
 
         if '@' in email_accountid:
             # If the provided value contains '@', treat it as an email
             user = User.objects.get(email=email_accountid)
-        else:
+        elif is_six_digit_number(str(email_accountid)):
             # Otherwise, treat it as an account ID
             user = User.objects.get(account_id=email_accountid)
+        else:
+            user = User.objects.get(firstname=email_accountid)
 
-        print(user)
-
-        print(password)
-        print(user.password)
         if user is not None and user.check_password(password):
-            print("loggedin")
-            user.is_loggedin = True
-            # Create a new session
-            session = SessionStore()
-            session['user_id'] = user.id
-            session.save()
+            if not user.is_active:
+                print("done1")
+                return render(request, "app/signin/accountSuspended.html", locals())
+            elif user.is_admin:
+                # Log in the user as an admin
+                admin_user = authenticate(request, username=user.firstname, password=password)
+                if admin_user is not None:
+                    login(request, admin_user)
+                    return HttpResponseRedirect(reverse('admin:index'))
+                print("done2")
+            else:
+                print("loggedin")
+                user.is_loggedin = True
+                # Create a new session
+                
 
-            # Set the session ID in the response cookies
-            response = render(request, "app/signin/loginSuccess.html", locals())
-            response.set_cookie('sessionid', session.session_key)
+                session = SessionStore()
+                session['user_id'] = user.id
+                if remember_me:
+                    # Set the session expiry to a longer duration
+                    session_expiry=session.set_expiry(604800)  # 7 days
+                else:
+                    # Set the session expiry to the default duration (using SESSION_COOKIE_AGE)
+                    session_expiry=session.set_expiry(0)
+                session.save()
 
-            # Redirect to the home page or any other desired page
-            return response
+                
+                    
+
+                # Set the session ID in the response cookies
+                response = render(request, "app/signin/loginSuccess.html", locals())
+                response.set_cookie('sessionid', session.session_key, session_expiry)
+
+                # Redirect to the home page or any other desired page
+                return response
         else:
             # Authentication failed
             return render(request, "app/signin/signin.html", {'auth_failed': True})
@@ -224,6 +252,14 @@ class ProfileView(View):
 
             # Save the updated user object
             user.save()
+            mail_subject = 'Profile Updated'
+            context = {
+            'user': user,
+            }
+            message = render_to_string('app/profile/profile_update_success.html', context)
+
+            # Send the email with the user_id
+            send_mail(mail_subject, strip_tags(message), settings.DEFAULT_FROM_EMAIL, [user.email])
 
         return render(request, "app/profile/edit_profile_success.html", {'user': user})
     
@@ -380,38 +416,38 @@ class reset_account(View):
         
         return render(request, "app/forgot_password/reset_password_error.html")
 
-class ResetPasswordView(View):
+# class ResetPasswordView(View):
 
-    def get(self, request, email):
-        # Use the email to retrieve the user
-        user = User.objects.get(email=email)
-        return render(request, "app/reset_password.html", {'email': email, 'user': user})
+#     def get(self, request, email):
+#         # Use the email to retrieve the user
+#         user = User.objects.get(email=email)
+#         return render(request, "app/reset_password.html", {'email': email, 'user': user})
     
-    def post(self, request):
-        new_password1 = request.POST.get('password1')
-        new_password2 = request.POST.get('password2')
+#     def post(self, request):
+#         new_password1 = request.POST.get('password1')
+#         new_password2 = request.POST.get('password2')
 
-        # Retrieve the user based on the session ID
-        user_id = request.session.get('user_id')
-        user = User.objects.get(id=user_id) if user_id else None
-        print(user)
+#         # Retrieve the user based on the session ID
+#         user_id = request.session.get('user_id')
+#         user = User.objects.get(id=user_id) if user_id else None
+#         print(user)
 
-        if user:
-            # Check if the old password matches the user's current password
-            if user.check_password(old_password):
-                # Validate the new password
-                if new_password1 == new_password2:
-                    # Set the user's new password
-                    user.password = make_password(new_password1)
-                    user.save()
-                    print("changed")
+#         if user:
+#             # Check if the old password matches the user's current password
+#             if user.check_password(old_password):
+#                 # Validate the new password
+#                 if new_password1 == new_password2:
+#                     # Set the user's new password
+#                     user.password = make_password(new_password1)
+#                     user.save()
+#                     print("changed")
                     
-                    return render(request, "app/change_password/chgPwdSuccess.html", locals())  # Redirect to the profile page or any other desired page
-                else:
-                    return render(request, "app/change_password/changePwd.html", {'match_failed': True})
-            else:
-                print('old wrong pwd')
-        else:
-            print('user nf')
+#                     return render(request, "app/change_password/chgPwdSuccess.html", locals())  # Redirect to the profile page or any other desired page
+#                 else:
+#                     return render(request, "app/change_password/changePwd.html", {'match_failed': True})
+#             else:
+#                 print('old wrong pwd')
+#         else:
+#             print('user nf')
 
-        return render(request, "app/change_password/changePwd.html", {'check_failed': True})
+#         return render(request, "app/change_password/changePwd.html", {'check_failed': True})
