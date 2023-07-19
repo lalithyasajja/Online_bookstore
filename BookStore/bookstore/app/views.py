@@ -1,3 +1,4 @@
+import random
 from django.shortcuts import render, redirect
 from django.shortcuts import render, get_object_or_404
 from django.views import View
@@ -319,3 +320,98 @@ def activate_account(request, token):
         return render(request, 'app/signup/account_activated.html')
     
     return render(request, "app/signup/activation_error.html")
+
+class FpEnterEmailView(View):
+    def get(self, request):
+        return render(request, "app/forgot_password/Fp_Enter_Email.html", locals())
+    
+    def post(self, request):
+        # Retrieve the form data from the POST request
+        email = request.POST.get('reset_email')
+
+        #OTP Generator
+        reset_token = random.randint(100000, 999999)
+
+        user = User.objects.get(email=email)
+        print(user)
+        user.reset_token = reset_token
+        print(user.reset_token)
+        user.save()
+
+        mail_subject = 'Reset your password'
+        context = {
+            'user': user,
+            'token': reset_token,  # Add the token variable to the context
+        }
+        message = render_to_string('app/forgot_password/Reset_Link_email.html', context)
+
+        # Send activation email
+        send_mail(mail_subject, strip_tags(message), settings.DEFAULT_FROM_EMAIL, [email], html_message=message)
+        
+        # Redirect to the signup success page
+        return redirect('ResetPassword')
+    
+class reset_account(View):
+    def get(self, request):
+        return render(request, "app/forgot_password/reset_password.html", locals())
+    
+    def post(self, request):
+        validate_token = request.POST.get('otp')
+        new_password1 = request.POST.get('password1')
+        new_password2 = request.POST.get('password2')
+        try:
+            user = User.objects.get(reset_token=validate_token)
+        except User.DoesNotExist:
+            user = None
+
+        if user is not None and new_password1==new_password2:
+            user.reset_token = None
+            user.password=make_password(new_password1)
+            user.save()
+
+            # Prepare the email with the user_id
+            mail_subject = 'Password Changed'
+            message = render_to_string('app/forgot_password/password_reset_success.html')
+
+            # Send the email with the user_id
+            send_mail(mail_subject, strip_tags(message), settings.DEFAULT_FROM_EMAIL, [user.email])
+
+            return render(request, 'app/forgot_password/reset_password_success.html')
+        
+        return render(request, "app/forgot_password/reset_password_error.html")
+
+class ResetPasswordView(View):
+
+    def get(self, request, email):
+        # Use the email to retrieve the user
+        user = User.objects.get(email=email)
+        return render(request, "app/reset_password.html", {'email': email, 'user': user})
+    
+    def post(self, request):
+        new_password1 = request.POST.get('password1')
+        new_password2 = request.POST.get('password2')
+
+        # Retrieve the user based on the session ID
+        user_id = request.session.get('user_id')
+        user = User.objects.get(id=user_id) if user_id else None
+        print(user)
+
+        if user:
+            # Check if the old password matches the user's current password
+            if user.check_password(old_password):
+                # Validate the new password
+                if new_password1 == new_password2:
+                    # Set the user's new password
+                    user.password = make_password(new_password1)
+                    user.save()
+                    print("changed")
+                    
+                    return render(request, "app/change_password/chgPwdSuccess.html", locals())  # Redirect to the profile page or any other desired page
+                else:
+                    return render(request, "app/change_password/changePwd.html", {'match_failed': True})
+            else:
+                print('old wrong pwd')
+        else:
+            print('user nf')
+
+        return render(request, "app/change_password/changePwd.html", {'check_failed': True})
