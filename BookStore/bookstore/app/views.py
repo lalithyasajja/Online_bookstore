@@ -47,7 +47,7 @@ class SignupView(View):
         return encrypted_value
     
     def get(self, request):
-        return render(request, "app/signup.html", locals())
+        return render(request, "app/signup/signup.html", locals())
     
     def post(self, request):
         # Retrieve the form data from the POST request
@@ -72,7 +72,7 @@ class SignupView(View):
         # Check if passwords match
         if password != confirm_password:
             # Render the signup page with an error message
-            return render(request, "app/signup.html", {'password_mismatch': True})
+            return render(request, "app/signup/signup.html", {'password_mismatch': True})
         
         hashed_password = make_password(password)
         
@@ -112,23 +112,23 @@ class SignupView(View):
             'activation_link': activation_link,
             'token': activation_token,  # Add the token variable to the context
         }
-        message = render_to_string('app/activation_email.html', context)
+        message = render_to_string('app/signup/activation_email.html', context)
 
         # Send activation email
         send_mail(mail_subject, strip_tags(message), settings.DEFAULT_FROM_EMAIL, [email], html_message=message)
         
         # Redirect to the signup success page
-        return render(request, "app/signupSuccess.html", locals())
+        return render(request, "app/signup/signupSuccess.html", locals())
 
 class SignupSuccessView(View):
     def get(self, request):
         user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
-        return render(request, "app/signupSuccess.html", locals())
+        return render(request, "app/signup/signupSuccess.html", locals())
     
 class SigninView(View):
     def get(self, request):
         user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
-        return render(request, "app/signin.html", locals())
+        return render(request, "app/signin/signin.html", locals())
     
     def post(self, request):
         # Retrieve the form data from the POST request
@@ -155,14 +155,14 @@ class SigninView(View):
             session.save()
 
             # Set the session ID in the response cookies
-            response = render(request, "app/loginSuccess.html", locals())
+            response = render(request, "app/signin/loginSuccess.html", locals())
             response.set_cookie('sessionid', session.session_key)
 
             # Redirect to the home page or any other desired page
             return response
         else:
             # Authentication failed
-            return render(request, "app/signin.html", {'auth_failed': True})
+            return render(request, "app/signin/signin.html", {'auth_failed': True})
         
 class LogoutView(View):
     def get(self, request):
@@ -182,7 +182,7 @@ class LogoutView(View):
             pass
 
         # Redirect to the desired page after logout
-        return render(request, "app/logoutSuccess.html", locals())
+        return render(request, "app/signout/logoutSuccess.html", locals())
     
 class ProfileView(View):
     @staticmethod
@@ -199,7 +199,7 @@ class ProfileView(View):
         user = User.objects.get(id=user_id) if user_id else None
         user.card_number = self.decrypt(user.card_number)
         user.security_code = self.decrypt(user.security_code)
-        return render(request, "app/profile.html", {'user': user})
+        return render(request, "app/profile/profile.html", {'user': user})
     
     def post(self, request):
         user_id = request.session.get('user_id')
@@ -224,14 +224,14 @@ class ProfileView(View):
             # Save the updated user object
             user.save()
 
-        return render(request, "app/edit_profile_success.html", {'user': user})
+        return render(request, "app/profile/edit_profile_success.html", {'user': user})
     
     
     
 class ChangePwdView(View):
     def get(self, request):
         user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
-        return render(request, "app/changePwd.html", locals())
+        return render(request, "app/change_password/changePwd.html", locals())
     
     def post(self, request):
         old_password = request.POST.get('oldPassword')
@@ -253,15 +253,15 @@ class ChangePwdView(View):
                     user.save()
                     print("changed")
                     
-                    return render(request, "app/chgPwdSuccess.html", locals())  # Redirect to the profile page or any other desired page
+                    return render(request, "app/change_password/chgPwdSuccess.html", locals())  # Redirect to the profile page or any other desired page
                 else:
-                    return render(request, "app/changePwd.html", {'match_failed': True})
+                    return render(request, "app/change_password/changePwd.html", {'match_failed': True})
             else:
                 print('old wrong pwd')
         else:
             print('user nf')
 
-        return render(request, "app/changePwd.html", {'check_failed': True})
+        return render(request, "app/change_password/changePwd.html", {'check_failed': True})
     
 
 class BookDetailsView(View):
@@ -273,27 +273,27 @@ class BookDetailsView(View):
 class CartView(View):
     def get(self, request):
         user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
-        return render(request, "app/cart.html", locals())
+        return render(request, "app/order/cart.html", locals())
 
 class CheckoutView(View):
     def get(self, request):
         user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
-        return render(request, "app/checkout.html", locals())
+        return render(request, "app/order/checkout.html", locals())
 
 class OrderSummaryView(View):
     def get(self, request):
         user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
-        return render(request, "app/orderSummary.html", locals())
+        return render(request, "app/order/orderSummary.html", locals())
     
 class OrderSuccessView(View):
     def get(self, request):
         user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
-        return render(request, "app/orderSuccess.html", locals())
+        return render(request, "app/order/orderSuccess.html", locals())
     
 class OrderHistoryView(View):
     def get(self, request):
         user = User.objects.get(id=request.session.get('user_id')) if request.session.get('user_id') else None
-        return render(request, "app/orderHistory.html", locals())
+        return render(request, "app/order/orderHistory.html", locals())
     
 
 def activate_account(request, token):
@@ -309,13 +309,13 @@ def activate_account(request, token):
 
         # Prepare the email with the user_id
         mail_subject = 'Your Account ID'
-        message = render_to_string('app/user_id_email.html', {
+        message = render_to_string('app/profile/user_id_email.html', {
             'account_id': user.account_id,
         })
 
         # Send the email with the user_id
         send_mail(mail_subject, strip_tags(message), settings.DEFAULT_FROM_EMAIL, [user.email])
 
-        return render(request, 'app/account_activated.html')
+        return render(request, 'app/signup/account_activated.html')
     
-    return render(request, "app/activation_error.html")
+    return render(request, "app/signup/activation_error.html")
