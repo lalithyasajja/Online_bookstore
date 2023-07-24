@@ -1,0 +1,115 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}OrderHistory{% endblock title %}
+
+{% block main-content %}
+<section class="h-100" style="margin-top:5rem; background-color: black; margin-bottom: 5rem;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12">
+          <div class="card card-registration card-registration-2" style="border-radius: 15px; background-color: black; border: 2px solid white;">
+            <div class="card-body p-0">
+                  <div class="p-5" style="border:2px solid whitw; border-radius: 12px;">
+                    <div class="d-flex justify-content-between align-items-center mb-5">
+                      <h1 class="fw-bold mb-0 text-white">Order History</h1>
+                      <h6 class="mb-0 text-white">3 items</h6>
+                    </div>
+                    <hr class="my-4">
+  
+                    <div class="row mb-4 d-flex justify-content-between align-items-center">
+                      <div class="col-md-2 col-lg-2 col-xl-2">
+                        <img
+                          src={% static 'app/images/banner/b1.jpg' %}
+                          class="img-fluid rounded-3" alt="Cotton T-shirt">
+                      </div>
+                      <div class="col-md-3 col-lg-3 col-xl-3">
+                        <h5 class="text-white">Order# 111111</h5>
+                        <h6 class="text-white mb-0 cart-book-title">Date Ordered: 02/04/2023</h6>
+                      </div>
+                      <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                        <a href="#">Track Order</a>
+                      </div>
+                      <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                        <h6 class="mb-0 text-white">Total: $ 120.99</h6>
+                      </div>
+                      <div class="col-md-1 col-lg-1 col-xl-1 text-end" style="
+                      display: flex;
+                      flex-direction: column;
+                      width: fit-content;
+                  ">
+                        <a href="#!">Reorder</a>
+                        <a href="#!">View Order</a>
+                      </div>
+                    </div>
+  
+                    <hr class="my-4">
+  
+                    <div class="row mb-4 d-flex justify-content-between align-items-center">
+                      <div class="col-md-2 col-lg-2 col-xl-2">
+                        <img
+                          src={% static 'app/images/banner/b2.jpg' %}
+                          class="img-fluid rounded-3" alt="Cotton T-shirt">
+                      </div>
+                      <div class="col-md-3 col-lg-3 col-xl-3">
+                        <h5 class="text-white">Order# 222222</h5>
+                        <h6 class="text-white mb-0 cart-book-title">Date Ordered: 07/05/2023</h6>
+                      </div>
+                      <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                        <a href="#">Track Order</a>
+                      </div>
+                      <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                        <h6 class="mb-0 text-white">Total: $ 279.99</h6>
+                      </div>
+                      <div class="col-md-1 col-lg-1 col-xl-1 text-end" style="
+                      display: flex;
+                      flex-direction: column;
+                      width: fit-content;
+                  ">
+                        <a href="#!">Reorder</a>
+                        <a href="#!">View Order</a>
+                      </div>
+                    </div>
+
+                    <hr class="my-4">
+  
+                    <div class="row mb-4 d-flex justify-content-between align-items-center">
+                      <div class="col-md-2 col-lg-2 col-xl-2">
+                        <img
+                          src={% static 'app/images/banner/b3.jpg' %}
+                          class="img-fluid rounded-3" alt="Cotton T-shirt">
+                      </div>
+                      <div class="col-md-3 col-lg-3 col-xl-3">
+                        <h5 class="text-white">Order# 333333</h5>
+                        <h6 class="text-white mb-0 cart-book-title">Date Ordered: 01/24/2023</h6>
+                      </div>
+                      <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                        <a href="#">Track Order</a>
+                      </div>
+                      <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                        <h6 class="mb-0 text-white">Total: $ 9.99</h6>
+                      </div>
+                      <div class="col-md-1 col-lg-1 col-xl-1 text-end" style="
+                      display: flex;
+                      flex-direction: column;
+                      width: fit-content;
+                  ">
+                        <a href="#!">Reorder</a>
+                        <a href="#!">View Order</a>
+                      </div>
+                    </div>
+  
+                    <hr class="my-4">
+  
+                    <div class="pt-5 text-white">
+                      <h6 class="mb-0"><a href="{% url 'home' %}" class="text-body" style="color: #0d6efd !important;"><i
+                            class="fas fa-long-arrow-alt-left me-2"></i>Back to home</a></h6>
+                    </div>
+                  </div>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock main-content %}
+

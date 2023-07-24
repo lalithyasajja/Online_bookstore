@@ -1,0 +1,102 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}orderSummary{% endblock title %}
+
+{% block main-content %}
+<section class="checkout-section">
+    <div class="container py-5">
+      <div class="card checkout-card">
+        <div class="card-body orderSummary-card-body" style="
+        padding-bottom: 3rem;">
+          <div class="row d-flex pb-5">
+            <div class="py-4 d-flex flex-row" style="justify-content: space-between; padding:8rem">
+                <h3 class="text-white" style="
+                display: flex;
+                flex-direction: column;
+                justify-content: center;"><b><i class="fa fa-list" aria-hidden="true"></i>   ORDER SUMMARY</b></h3>
+                <div class="py-4 d-flex justify-content-end">
+                    <h6><a href="{% url 'home' %}">
+                        Modify Order</a></h6>
+                  </div>
+              </div>
+              
+            <div class="card-and-addr-col">
+              
+
+              <div class="col-md-5 col-xl-4">
+                <div class="rounded d-flex flex-column p-2" style="background-color: black;color: white;border: 2px solid white;">
+                  <div class="p-2 me-3">
+                    <h4>Order Details</h4>
+                  </div>
+                  <div class="p-2 d-flex">
+                    <div class="col-8">Alan Turing: The Enigma</div>
+                    <div class="ms-auto">$12.99</div>
+                  </div>
+                  <div class="p-2 d-flex">
+                    <div class="col-8">The Postman Always Rings Twice</div>
+                    <div class="ms-auto">$139.99</div>
+                  </div>
+                  <div class="p-2 d-flex">
+                    <div class="col-8">Closer To Love</div>
+                    <div class="ms-auto">$19.99</div>
+                  </div>
+                  {% comment %} <div class="p-2 d-flex">
+                    <div class="col-8">Copayment</div>
+                    <div class="ms-auto">+ $40.00</div>
+                  </div> {% endcomment %}
+                  <div class="border-top px-2 mx-2"></div>
+                  <div class="p-2 d-flex pt-3">
+                    <div class="col-8">Sub-Total</div>
+                    <div class="ms-auto">$172.97</div>
+                  </div>
+                  <div class="p-2 d-flex">
+                    <div class="col-8">
+                      Shipping
+                    </div>
+                    <div class="ms-auto">$5.00</div>
+                  </div>
+                  <div class="border-top px-2 mx-2"></div>
+                  <div class="p-2 d-flex pt-3">
+                    <div class="col-8">Total</div>
+                    <div class="ms-auto"><b>$177.97</b></div>
+                  </div>
+                  <div class="p-2 d-flex">
+                    <div class="col-8">
+                      Tax <span class="fa fa-question-circle text-dark"></span>
+                    </div>
+                    <div class="ms-auto"><b>$7.76</b></div>
+                  </div>
+                  <div class="border-top px-2 mx-2"></div>
+                  <div class="p-2 d-flex pt-3">
+                    <div class="col-8"><b>Total</b></div>
+                    <div class="ms-auto"><b class="text-success">$185.73</b></div>
+                  </div>
+                </div>
+              </div>
+                    
+                 </div>
+                  
+              </div>
+              <div style="display:flex; flex-direction: row; justify-content: center;">
+                <button type="button" class="btn btn-primary btn-block btn-lg"
+                data-mdb-ripple-color="dark" onclick="redirectToOrderSuccess()">Place Order</button>
+            </div>
+            <script>
+                function redirectToOrderSuccess() {
+                  window.location.href = "{% url 'orderSuccess' %}";
+                }
+              </script>
+              <div class="pt-5 text-white">
+                <h6 class="mb-0" style="margin-left:8rem;"><a href="{% url 'checkout' %}" class="text-body" style="color: #0d6efd !important;"><i
+                      class="fas fa-long-arrow-alt-left me-2"></i>Back to Checkout</a></h6>
+              </div>
+              
+            </div>
+  
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock main-content %}
