@@ -82,10 +82,71 @@
                   <a href="{% url 'bookDetails' book_isbn=b.ISBN %}" class="btn btn-light" role="button" style="border: 2px solid white">
                     <i class="fa fa-info-circle" aria-hidden="true"></i> View Details
                   </a>
-                  <button data-product={{b.id}} data-action="add" class="btn btn-primary me-md-2 update-cart" type="button">
+<!--                  <button data-product="{{b.id}}" data-action="add" class="btn btn-primary me-md-2 update-cart" type="button" id="featured_book_button">-->
+<!--  Add to Cart-->
+<!--  <i class="fa fa-cart-plus" aria-hidden="true"></i>-->
+<!--</button>-->
+
+<!--&lt;!&ndash; Your JavaScript code &ndash;&gt;-->
+<!--<script type="text/javascript">-->
+<!--  var user = '{{request.user}}';-->
+
+<!--  function getToken(name) {-->
+<!--    var cookieValue = null;-->
+<!--    if (document.cookie && document.cookie !== '') {-->
+<!--      var cookies = document.cookie.split(';');-->
+<!--      for (var i = 0; i < cookies.length; i++) {-->
+<!--        var cookie = cookies[i].trim();-->
+<!--        // Does this cookie string begin with the name we want?-->
+<!--        if (cookie.substring(0, name.length + 1) === (name + '=')) {-->
+<!--          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));-->
+<!--          break;-->
+<!--        }-->
+<!--      }-->
+<!--    }-->
+<!--    return cookieValue;-->
+<!--  }-->
+
+<!--  var csrftoken = getToken('csrftoken');-->
+
+<!--  const toastLogin = document.getElementById('featured_book_button');-->
+<!--  if (user.is_active) {-->
+<!--    console.log("ACTIVE");-->
+<!--  } else {-->
+<!--    console.log("Please Login");-->
+<!--  }-->
+                  <script type="text/javascript"> var user = '{{request.user}}'
+    function getToken(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getToken('csrftoken')
+
+    </script>
+                  <button data-product={{b.id}} data-action="add" class="btn btn-primary me-md-2 update-cart" type="button" id="featured_book_button">
                     Add to Cart
                     <i class="fa fa-cart-plus" aria-hidden="true"></i>
                   </button>
+                  <script>
+                    const toastLogin = document.getElementById('featured_book_button')
+                    if (user.is_active) {
+                    console.log("ACTIVE")
+                    }
+                    else{
+                    console.log("Please Login")
+                    }
+                  </script>
                 </div>
               </div>
             </div>
