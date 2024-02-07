@@ -4,7 +4,7 @@ import os
 import sys
 
 
-def main():
+def main(): #added
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bookstore.settings')
     try:
